@@ -44,6 +44,10 @@ def save_credentials():
 
     return render_template('save_credentials.html', ssid = ssid)
 
+@app.route('/take_photo', methods = ['GET', 'POST'])
+def take_photo():
+    return render_template('manual_ssid_entry.html')
+
 
 @app.route('/save_wpa_credentials', methods = ['GET', 'POST'])
 def save_wpa_credentials():

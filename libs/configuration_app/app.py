@@ -4,6 +4,8 @@ import os
 import time
 from threading import Thread
 import fileinput
+import RPi.GPIO as GPIO
+import time
 
 app = Flask(__name__)
 app.debug = True
@@ -46,7 +48,46 @@ def save_credentials():
 
 @app.route('/take_photo', methods = ['GET', 'POST'])
 def take_photo():
-    return render_template('manual_ssid_entry.html')
+    GPIO_OUTPUT = 18
+    WAIT = 0.1
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(GPIO_OUTPUT, GPIO.OUT)
+    GPIO.output(GPIO_OUTPUT, 0)
+
+    #while True:
+    #	x = input("Enter 1 or 0: ")
+    #	print(x)
+    #	if (x == 1):
+    #		GPIO.output(GPIO_OUTPUT, 1)
+    #	elif (x == 0):
+    #		GPIO.output(GPIO_OUTPUT, 0)
+    #	else:
+    #		print("Incorrect input")
+    GPIO.output(GPIO_OUTPUT, 1)
+    time.sleep(WAIT)
+    GPIO.output(GPIO_OUTPUT, 0)
+    
+    wifi_ap_array = scan_wifi_networks()
+    config_hash = config_file_hash()
+
+    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
+
+@app.route('/start_video', methods = ['GET', 'POST'])
+def start_video():
+    # TODO
+    wifi_ap_array = scan_wifi_networks()
+    config_hash = config_file_hash()
+
+    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
+
+@app.route('/end_video', methods = ['GET', 'POST'])
+def end_video():
+    # TODO
+    wifi_ap_array = scan_wifi_networks()
+    config_hash = config_file_hash()
+
+    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
 
 
 @app.route('/save_wpa_credentials', methods = ['GET', 'POST'])
@@ -76,16 +117,16 @@ def save_wpa_credentials():
 ######## FUNCTIONS ##########
 
 def scan_wifi_networks():
+    # !!!! COMMENT BACK IN FOR RPI !!!!
     iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
     ap_list, err = iwlist_raw.communicate()
-    ap_array = []
-
     for line in ap_list.decode('utf-8').rsplit('\n'):
         if 'ESSID' in line:
             ap_ssid = line[27:-1]
             if ap_ssid != '':
                 ap_array.append(ap_ssid)
-
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ap_array = []
     return ap_array
 
 def create_wpa_supplicant(ssid, wifi_key):
@@ -131,18 +172,20 @@ def update_wpa(wpa_enabled, wpa_key):
                 print(line_array[0] + '=' + line_array[1])
 
             if 'wpa_enabled=' not in line and 'wpa_key=' not in line:
-                print(line, end='')
+                pass
+                # Had to comment this out for some reason:
+                # print(line, end='')
 
 
 def config_file_hash():
+    # !!!!! COMMENT BACK IN FOR RPI !!!!!!
     config_file = open('/etc/raspiwifi/raspiwifi.conf')
-    config_hash = {}
-
     for line in config_file:
         line_key = line.split("=")[0]
         line_value = line.split("=")[1].rstrip()
         config_hash[line_key] = line_value
-
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    config_hash = {}
     return config_hash
 
 

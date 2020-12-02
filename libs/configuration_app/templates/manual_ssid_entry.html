@@ -2,15 +2,24 @@
 
 {% block body %}
   <div id="mainContent">
-    <h1>WiFi Setup</h1>
-    <div class="wifiIcon"></div>
+    <h1>Moonlight Camera</h1>
+    <br>
 
     <form action="{{ url_for('take_photo') }}" method=post>
       <ul>
-        <li><label for="ssid">Type 'p' and submit to take a photo</label></li>
-        <li><input type="text" name="command", class="wifiNetworkInputs"></li>
+        <input type="submit", value="Take Photo", class="wifiConnectButton">
+      </ul>
+    </form>
 
-        <input type="submit", class="wifiConnectButton">
+    <form action="{{ url_for('start_video') }}" method=post>
+      <ul>
+        <input type="submit", value="Start Video", class="wifiConnectButton">
+      </ul>
+    </form>
+    
+    <form action="{{ url_for('end_video') }}" method=post>
+      <ul>
+        <input type="submit", value="End Video", class="wifiConnectButton">
       </ul>
     </form>
   </div>

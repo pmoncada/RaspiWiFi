@@ -15,17 +15,32 @@
       </ul>
     </div>
 
-    <h1>Moonlight Cam</h1>
-    
-    <li><a href="{{ url_for('manual_ssid_entry') }}" class="manualSSIDEntry">Take a photo</a></li>
-    
-    
-    <h1>Once you take a photo, upload images by connecting to the internet:</h1>
-    <div class="wifiIcon"></div>
-
+    <div id="mainContent">
+      <h1>Moonlight Camera</h1>
+      <br>
+  
+      <form action="{{ url_for('take_photo') }}" method=post>
+        <ul>
+          <input type="submit", value="Take Photo", class="wifiConnectButton">
+        </ul>
+      </form>
+  
+      <form action="{{ url_for('start_video') }}" method=post>
+        <ul>
+          <input type="submit", value="Start Video", class="wifiConnectButton">
+        </ul>
+      </form>
+      
+      <form action="{{ url_for('end_video') }}" method=post>
+        <ul>
+          <input type="submit", value="End Video", class="wifiConnectButton">
+        </ul>
+      </form>
+    </div>
+    <br><br>
     <form action="{{ url_for('save_credentials') }}" method=post>
       <ul>
-        <li><label for="ssid">Select your WiFi network</label></li>
+        <li><label for="ssid">Connect to the wifi to upload photos</label></li>
 
         <li class="wifiNetwork">
           <select id="ssid" name="ssid", class="wifiNetworkInputs">

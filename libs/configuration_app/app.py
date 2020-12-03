@@ -174,7 +174,7 @@ def update_wpa(wpa_enabled, wpa_key):
             if 'wpa_enabled=' not in line and 'wpa_key=' not in line:
                 pass
                 # Had to comment this out for some reason:
-                # print(line, end='')
+                print(line, end='')
 
 
 def config_file_hash():

@@ -172,7 +172,7 @@ def update_wpa(wpa_enabled, wpa_key):
                 print(line_array[0] + '=' + line_array[1])
 
             if 'wpa_enabled=' not in line and 'wpa_key=' not in line:
-                pass
+                # pass
                 # Had to comment this out for some reason:
                 print(line, end='')
 

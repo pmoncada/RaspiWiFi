@@ -4,7 +4,7 @@ import os
 import time
 from threading import Thread
 import fileinput
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
 
 app = Flask(__name__)
@@ -48,12 +48,12 @@ def save_credentials():
 
 @app.route('/take_photo', methods = ['GET', 'POST'])
 def take_photo():
-    GPIO_OUTPUT = 18
-    WAIT = 0.1
+    # GPIO_OUTPUT = 18
+    # WAIT = 0.1
 
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(GPIO_OUTPUT, GPIO.OUT)
-    GPIO.output(GPIO_OUTPUT, 0)
+    # GPIO.setmode(GPIO.BCM)
+    # GPIO.setup(GPIO_OUTPUT, GPIO.OUT)
+    # GPIO.output(GPIO_OUTPUT, 0)
 
     #while True:
     #	x = input("Enter 1 or 0: ")
@@ -64,9 +64,10 @@ def take_photo():
     #		GPIO.output(GPIO_OUTPUT, 0)
     #	else:
     #		print("Incorrect input")
-    GPIO.output(GPIO_OUTPUT, 1)
-    time.sleep(WAIT)
-    GPIO.output(GPIO_OUTPUT, 0)
+   
+    # GPIO.output(GPIO_OUTPUT, 1)
+    # time.sleep(WAIT)
+    # GPIO.output(GPIO_OUTPUT, 0)
     
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()

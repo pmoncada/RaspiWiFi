@@ -5,7 +5,6 @@ import time
 from threading import Thread
 import fileinput
 # import RPi.GPIO as GPIO
-import time
 
 app = Flask(__name__)
 app.debug = True
@@ -64,10 +63,9 @@ def take_photo():
     #		GPIO.output(GPIO_OUTPUT, 0)
     #	else:
     #		print("Incorrect input")
-   
-    # GPIO.output(GPIO_OUTPUT, 1)
-    # time.sleep(WAIT)
-    # GPIO.output(GPIO_OUTPUT, 0)
+    #GPIO.output(GPIO_OUTPUT, 1)
+    #time.sleep(WAIT)
+    #GPIO.output(GPIO_OUTPUT, 0)
     
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()

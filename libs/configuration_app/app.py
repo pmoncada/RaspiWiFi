@@ -4,19 +4,15 @@ import os
 import time
 from threading import Thread
 import fileinput
-# import RPi.GPIO as GPIO
 
 app = Flask(__name__)
 app.debug = True
-
 
 @app.route('/')
 def index():
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
-
     return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
-
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
@@ -26,7 +22,6 @@ def manual_ssid_entry():
 def wpa_settings():
     config_hash = config_file_hash()
     return render_template('wpa_settings.html', wpa_enabled = config_hash['wpa_enabled'], wpa_key = config_hash['wpa_key'])
-
 
 @app.route('/save_credentials', methods = ['GET', 'POST'])
 def save_credentials():
@@ -66,10 +61,8 @@ def take_photo():
     #GPIO.output(GPIO_OUTPUT, 1)
     #time.sleep(WAIT)
     #GPIO.output(GPIO_OUTPUT, 0)
-    
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
-
     return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
 
 @app.route('/start_video', methods = ['GET', 'POST'])
@@ -77,7 +70,6 @@ def start_video():
     # TODO
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
-
     return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
 
 @app.route('/end_video', methods = ['GET', 'POST'])
@@ -85,7 +77,6 @@ def end_video():
     # TODO
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
-
     return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
 
 
@@ -109,8 +100,6 @@ def save_wpa_credentials():
 
     config_hash = config_file_hash()
     return render_template('save_wpa_credentials.html', wpa_enabled = config_hash['wpa_enabled'], wpa_key = config_hash['wpa_key'])
-
-
 
 
 ######## FUNCTIONS ##########

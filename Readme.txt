@@ -59,19 +59,19 @@ CONFIGURATION:
       created during Configuration Mode will be encrypted using WPA2 encryption. 
       The prompt following this one will let you specify the Wireless Key to be 
       used. You can leave the password blank if you chose 'N' to this option. 
-      -> Y
+      -> N
 
 ==== "Auto-Config mode" [default: n]: If you choose to enable this mode your Pi
       will check for an active connection while in normal operation mode (Client Mode).
       If an active connection has been determined to be lost, the Pi will reboot
       back into Configuration Mode (Host Mode) automatically.
-      -> N
+      -> Y
 
 ==== "Auto-Config delay" [default: 300 seconds]: This is the time in consecutive
       seconds to wait with an inactive connection before triggering a reset into
       Configuration Mode (Host Mode). This is only applicable if the
       "Auto-Config mode" mentioned above is set to active.
-      -> N/A
+      -> 300
 
 ==== "Server port" [default: 80]: This is the server port that the web server
       hosting the Configuration App page will be listening on. If you change

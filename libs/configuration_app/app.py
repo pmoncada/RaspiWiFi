@@ -108,7 +108,7 @@ def scan_wifi_networks():
     # !!!! COMMENT BACK IN FOR RPI !!!!
     iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
     ap_list, err = iwlist_raw.communicate()
-    ap_array[]
+    ap_array = []
     for line in ap_list.decode('utf-8').rsplit('\n'):
         if 'ESSID' in line:
             ap_ssid = line[27:-1]

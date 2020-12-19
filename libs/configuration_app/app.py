@@ -108,13 +108,13 @@ def scan_wifi_networks():
     # !!!! COMMENT BACK IN FOR RPI !!!!
     iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
     ap_list, err = iwlist_raw.communicate()
+    ap_array[]
     for line in ap_list.decode('utf-8').rsplit('\n'):
         if 'ESSID' in line:
             ap_ssid = line[27:-1]
             if ap_ssid != '':
                 ap_array.append(ap_ssid)
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ap_array = []
     return ap_array
 
 def create_wpa_supplicant(ssid, wifi_key):
@@ -168,12 +168,12 @@ def update_wpa(wpa_enabled, wpa_key):
 def config_file_hash():
     # !!!!! COMMENT BACK IN FOR RPI !!!!!!
     config_file = open('/etc/raspiwifi/raspiwifi.conf')
+    config_hash = {}
     for line in config_file:
         line_key = line.split("=")[0]
         line_value = line.split("=")[1].rstrip()
         config_hash[line_key] = line_value
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    config_hash = {}
     return config_hash
 
 
